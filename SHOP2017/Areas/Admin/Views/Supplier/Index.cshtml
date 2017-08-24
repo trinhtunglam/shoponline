@@ -1,0 +1,93 @@
+﻿@*@model PaginatedList<SHOP2017.Model.SupplierViewModel>*@
+@using PagedList.Core.Mvc
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+    <div id="ribbon">
+
+        <span class="ribbon-button-alignment">
+            <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+                <i class="fa fa-refresh"></i>
+            </span>
+        </span>
+
+        <!-- breadcrumb -->
+        <ol class="breadcrumb">
+            <li>Home</li>
+            <li>@ViewData["Title"]</li>
+        </ol>
+
+    </div>
+
+    <div id="content">
+        <a class="btn btn-info" data-toggle="modal" href="#AddModal" style="margin-bottom:5px;">Thêm mới danh mục</a>
+        <!-- widget grid -->
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                            <label style="padding:7px 0 0 10px;">Quản trị danh mục </label>
+                        </header>
+                        <!-- widget div-->
+                        <div>
+                            <!-- widget edit box -->
+                            <div class="jarviswidget-editbox">
+                                <!-- This area used as dropdown edit box -->
+                            </div>
+                            <!-- end widget edit box -->
+                            <!-- widget content -->
+                            <div class="widget-body no-padding">
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-hide="phone">ID</th>
+                                            <th data-class="expand">Tên nhà cung cấp</th>
+                                            <th data-hide="phone"> Địa chỉ</th>
+                                            <th data-hide="phone,tablet">Trạng thái</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Address</td>
+                                                <td>@item.Status</td>
+                                                <td>
+                                                    <button class="btn btn-primary btnEditModal" data-id="@item.Id"><i class="fa fa-pencil"></i></button>
+                                                    <button class="btn btn-danger btnDeleteModal" data-id="@item.Id"><i class="fa fa-trash-o"></i></button>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                    }
+
+                                </table>
+
+                            </div>
+                            <!-- end widget content -->
+
+                        </div>
+                        <!-- end widget div -->
+
+                    </div>
+                </article>
+                <!-- WIDGET END -->
+
+            </div>
+
+            <!-- end row -->
+            <!-- end row -->
+
+        </section>
+        <!-- end widget grid -->
+
+    </div>
+

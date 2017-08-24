@@ -1,0 +1,400 @@
+﻿@model IEnumerable<SHOP2017.Model.ProductCategoryViewModel>
+
+@{
+    ViewData["Title"] = "Danh Mục";
+    Layout = "~/Areas/Admin/Views/Shared/_layoutAdmin.cshtml";
+}
+
+
+<style>
+    #ribbon {
+        margin-top: -18px;
+    }
+</style>
+
+@section AdminScripts{
+
+    <script>
+        $('#btnHoanthanh').click(function () {
+            var tendanhmuc = $('#txtTendanhmuc').val();
+            var dinhdanh = $('#txtDinhdanh').val();
+            var mota = $('#txtMota').val();
+            var danhmuccha = $('#txtDanhmuccha').val();
+            var data = {
+                Name: tendanhmuc,
+                Alias: dinhdanh,
+                Description: mota,
+                ParentID: danhmuccha
+            };
+            $.ajax({
+                url: '/admin/productct/create',
+                data: { model: JSON.stringify(data) },
+                type: 'POST',
+                dataType: 'json',
+                success: function (responce) {
+                    if (responce.status == true) {
+                        location.reload();
+                    }
+                    else {
+                        alert("Failure");
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        });
+
+        $('.btnEditModal').click(function () {
+            $("#UpdateModal").modal('show');
+            var id = $(this).data('id');
+            $.ajax({
+                url: '/admin/productct/getbyid',
+                data: {
+                    id: id
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (responce) {
+                    if (responce.status == true) {
+                        debugger;
+                        var data = responce.data;
+                        $('#txtTendanhmucud').val(data.name);
+                        $('#hidID').val(data.id);
+                        $('#txtDinhdanhud').val(data.alias);
+                        $('#txtMotaud').val(data.description);
+                        $('#txtDanhmucchaud').val(data.parentid);
+                    }
+                    else {
+                        alert(responce.message);
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        });
+        
+        $('#btnHoanthanhUpdate').click(function () {
+            var tendanhmuc = $('#txtTendanhmucud').val();
+            var dinhdanh = $('#txtDinhdanhud').val();
+            var mota = $('#txtMotaud').val();
+            var danhmuccha = $('#txtDanhmucchaud').val();
+            var id = $('#hidID').val();
+            var data = {
+                Id:id,
+                Name: tendanhmuc,
+                Alias: dinhdanh,
+                Description: mota,
+                ParentID: danhmuccha
+            };
+            $.ajax({
+                url: '/admin/productct/update',
+                data: { model: JSON.stringify(data) },
+                type: 'POST',
+                dataType: 'json',
+                success: function (responce) {
+                    if (responce.status == true) {
+                        $("#UpdateModal").modal('hide');
+                        location.reload();
+                    }
+                    else {
+                        alert("Failure");
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        });
+
+        $('.btnDeleteModal').click(function () {
+            var id = $(this).data('id');
+            bootbox.confirm("Are you sure Delete?", function (result) {
+                //Example.show("Confirm result: " + result);
+                if (result == true) {
+                    $.ajax({
+                        url: '/admin/productct/delete',
+                        data: {
+                            id: id
+                        },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (responce) {
+                            if (responce.status == true) {
+                                bootbox.alert("Delete Success", function () {
+                                    location.reload();
+                                });
+                            }
+                            else {
+                                alert("Loi");
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+                }
+            });
+
+            
+        });
+    </script>
+}
+
+<!-- RIBBON -->
+<div id="ribbon">
+
+    <span class="ribbon-button-alignment">
+        <span id="refresh" class="btn btn-ribbon" data-action="resetWidgets" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings." data-html="true">
+            <i class="fa fa-refresh"></i>
+        </span>
+    </span>
+
+    <!-- breadcrumb -->
+    <ol class="breadcrumb">
+        <li>Home</li>
+        <li>@ViewData["Title"]</li>
+    </ol>
+
+</div>
+
+<div id="content">
+    <a class="btn btn-info" data-toggle="modal" href="#AddModal" style="margin-bottom:5px;">Thêm mới danh mục</a>
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <label style="padding:7px 0 0 10px;">Quản trị danh mục </label>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th data-hide="phone">ID</th>
+                                        <th data-class="expand"> Tên danh mục</th>
+                                        <th data-hide="phone"> Định danh</th>
+                                        <th data-hide="phone,tablet"> Mô tả</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>@item.Id</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Alias</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <button class="btn btn-primary btnEditModal" data-id="@item.Id"><i class="fa fa-pencil"></i></button>
+                                                <button class="btn btn-danger btnDeleteModal" data-id="@item.Id"><i class="fa fa-trash-o"></i></button>
+                                            </td>
+                                        </tr>
+                                        }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+
+
+
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    @*<img src="img/logo.png" width="150" alt="SmartAdmin">*@
+                    Thêm mới danh mục
+                </h4>
+            </div>
+            <div class="modal-body no-padding">
+                <form id="login-form" class="smart-form" asp-controller="ProductCategory" asp-action="Create" method="post">
+
+                    <fieldset>
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Tên Danh Mục</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="txtTendanhmuc" id="txtTendanhmuc">
+                                    </label>
+                                    
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Định Danh</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="text" name="txtDinhdanh" id="txtDinhdanh">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Mô Tả</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="text" name="txtMota" id="txtMota">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Danh Mục Cha</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="number" name="txtDanhmuccha" id="txtDanhmuccha">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+
+
+                    </fieldset>
+
+                    <footer>
+                        <button type="button" class="btn btn-primary" id="btnHoanthanh">
+                            Hoàn thành
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            Hủy
+                        </button>
+                    </footer>
+                </form>
+
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    @*<img src="img/logo.png" width="150" alt="SmartAdmin">*@
+                    Thêm mới danh mục
+                </h4>
+            </div>
+            <div class="modal-body no-padding">
+                <form id="login-form" class="smart-form" asp-controller="ProductCategory" asp-action="Create" method="post">
+
+                    <fieldset>
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Tên Danh Mục</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="txtTendanhmucud" id="txtTendanhmucud">
+                                    </label>
+                                    <input type="hidden" id="hidID" />
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Định Danh</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="text" name="txtDinhdanhud" id="txtDinhdanhud">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Mô Tả</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="text" name="txtMotaud" id="txtMotaud">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section>
+                            <div class="row">
+                                <label class="label col col-3">Danh Mục Cha</label>
+                                <div class="col col-9">
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        <input type="number" name="txtDanhmucchaud" id="txtDanhmucchaud">
+                                    </label>
+                                </div>
+                            </div>
+                        </section>
+
+
+                    </fieldset>
+
+                    <footer>
+                        <button type="button" class="btn btn-primary" id="btnHoanthanhUpdate">
+                            Hoàn thành
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            Hủy
+                        </button>
+                    </footer>
+                </form>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+

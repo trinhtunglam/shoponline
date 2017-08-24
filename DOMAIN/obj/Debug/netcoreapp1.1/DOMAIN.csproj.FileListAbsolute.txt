@@ -1,0 +1,7 @@
+C:\Users\Lambi\Desktop\SHOP2017\DOMAIN\bin\Debug\netcoreapp1.1\DOMAIN.deps.json
+C:\Users\Lambi\Desktop\SHOP2017\DOMAIN\bin\Debug\netcoreapp1.1\DOMAIN.dll
+C:\Users\Lambi\Desktop\SHOP2017\DOMAIN\bin\Debug\netcoreapp1.1\DOMAIN.pdb
+C:\Users\Lambi\Desktop\SHOP2017\DOMAIN\obj\Debug\netcoreapp1.1\DOMAIN.csprojResolveAssemblyReference.cache
+C:\Users\Lambi\Desktop\SHOP2017\DOMAIN\obj\Debug\netcoreapp1.1\DOMAIN.AssemblyInfo.cs
+C:\Users\Lambi\Desktop\SHOP2017\DOMAIN\obj\Debug\netcoreapp1.1\DOMAIN.dll
+C:\Users\Lambi\Desktop\SHOP2017\DOMAIN\obj\Debug\netcoreapp1.1\DOMAIN.pdb

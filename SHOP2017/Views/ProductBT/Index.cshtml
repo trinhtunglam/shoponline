@@ -1,0 +1,13 @@
+@model SHOP2017.Model.LoginViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+@using (Html.BeginForm("Test", "ProductBT", FormMethod.Post))
+{
+    <label>User :</label>
+    @Html.TextBoxFor(model=>model.UserName)
+    <label>PassWord</label>
+    @Html.PasswordFor(model => model.PassWord)
+}
+

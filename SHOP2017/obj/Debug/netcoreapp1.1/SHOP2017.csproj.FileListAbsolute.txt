@@ -1,0 +1,15 @@
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\SHOP2017.deps.json
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\SHOP2017.runtimeconfig.json
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\SHOP2017.runtimeconfig.dev.json
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\DATA.dll
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\DOMAIN.dll
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\SERVICES.dll
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\DATA.pdb
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\DOMAIN.pdb
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\obj\Debug\netcoreapp1.1\SHOP2017.csprojResolveAssemblyReference.cache
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\obj\Debug\netcoreapp1.1\SHOP2017.AssemblyInfo.cs
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\SHOP2017.dll
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\SHOP2017.pdb
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\bin\Debug\netcoreapp1.1\SERVICES.pdb
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\obj\Debug\netcoreapp1.1\SHOP2017.dll
+C:\Users\Lambi\Desktop\SHOP2017\SHOP2017\obj\Debug\netcoreapp1.1\SHOP2017.pdb
